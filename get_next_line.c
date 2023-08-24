@@ -31,10 +31,7 @@ t_list	*create_rem(t_list *node)
 	rem->content = malloc(sizeof(char) * (slen(node->content, 0) - i_ln + 1));
 	rem->next = NULL;
 	if (!rem->content)
-	{
-		free(rem);
-		return (NULL);
-	}
+		return (free_linked_list(rem));
 	while (i_ln < slen(node->content, 0) && node->content[i_ln])
 		rem->content[i_rem++] = node->content[i_ln++];
 	rem->content[i_rem] = '\0';
@@ -72,10 +69,8 @@ char	*fill_line(t_list *node)
 int	count_chars_in_line(t_list *node)
 {
 	int		chars;
-	t_list	*start;
 
 	chars = 0;
-	start = node;
 	while (node)
 	{
 		chars += slen(node->content, 1);
@@ -99,17 +94,10 @@ t_list	*make_a_node(int fd)
 	node->content = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	node->next = NULL;
 	if (!node->content)
-	{
-		free(node);
-		return (NULL);
-	}
+		return (free_linked_list(node));
 	read_chars = read(fd, node->content, BUFFER_SIZE);
 	if (read_chars == -1 || read_chars == 0) 
-	{
-		free(node->content);
-		free(node);
-		return (NULL);
-	}
+		return (free_linked_list(node));
 	node->content[read_chars] = '\0';
 	return (node);
 }
@@ -117,7 +105,6 @@ t_list	*make_a_node(int fd)
 char	*get_next_line(int fd)
 {
 	static t_list	*rem;
-	t_list			*rem1;
 	t_list			*node;
 	t_list			*lst;
 	char			*line;
@@ -125,15 +112,10 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
 		return (NULL);
 	if (rem && ft_strchr(rem->content, '\n'))
-	{
-		line = fill_line(rem);
-		rem1 = create_rem(rem);
-		free_linked_list(rem);
-		rem = rem1;
-		return (line);
-	}
-	node = make_a_node(fd);
-	if ((!node && !rem))
+		node = rem;
+	else
+		node = make_a_node(fd);
+	if (!node && !rem)
 		return (NULL);
 	lst = node;
 	while (lst && !(ft_strchr(lst->content, '\n')))

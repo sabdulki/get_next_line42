@@ -90,24 +90,21 @@ char	*create_line(t_list *node, t_list *rem)
 	char	*line;
 	char	*l;
 
+	line = NULL;
+	if (node == rem)
+		rem = NULL;
 	if (!node && rem && !ft_strchr(rem->content, '\n'))
-	{
 		line = fill_line(rem);
-		free_linked_list(rem);
-		return (line);
-	}
-	else if (node && !rem)
+	else if (node)
 	{
 		line = fill_line(node);
-		return (line);
+		if (rem)
+		{
+			l = ft_strjoin(rem->content, line);
+			free(line);
+			line = l;
+		}
 	}
-	else if (node && rem)
-	{
-		l = fill_line(node);
-		line = ft_strjoin(rem->content, l);
-		free(l);
-		free_linked_list(rem);
-		return (line);
-	}
-	return (0);
+	free_linked_list(rem);
+	return (line);
 }
