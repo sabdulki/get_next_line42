@@ -6,7 +6,7 @@
 /*   By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:20:12 by sabdulki          #+#    #+#             */
-/*   Updated: 2023/08/24 15:42:05 by sabdulki         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:49:40 by sabdulki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_list	*create_rem(t_list *last_node);
 //void	free_list(t_list *node);
 char	*ft_strchr(char *c, int ch);
 //char	*sum_up(char *line, t_list *rem);
-char	*changes(t_list *node, t_list *rem);
+char	*create_line(t_list *node, t_list *rem);
 char	*ft_strjoin(char *s1, char *s2);
 //char	*ft_strdup(char *s1);
 char	*get_next_line(int fd);

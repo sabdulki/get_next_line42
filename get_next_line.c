@@ -6,7 +6,7 @@
 /*   By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:55:53 by sabdulki          #+#    #+#             */
-/*   Updated: 2023/08/24 16:49:39 by sabdulki         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:03:26 by sabdulki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
 		return (NULL);
-	// node = NULL;
 	if (rem && ft_strchr(rem->content, '\n'))
 	{
-		// line = changes(node, rem);
-		// return (line);
 		line = fill_line(rem);
 		rem1 = create_rem(rem);
 		free_linked_list(rem);
@@ -136,27 +133,17 @@ char	*get_next_line(int fd)
 		return (line);
 	}
 	node = make_a_node(fd);
-	if (!node && rem)
-	{
-		//line = changes(node, rem);
-		line = fill_line(rem);
-		// free_linked_list(rem);
-		free(rem->content);
-		free(rem);
-		rem = NULL;
-		return (line);
-	}
 	if ((!node && !rem))
 		return (NULL);
 	lst = node;
-	while (!(ft_strchr(lst->content, '\n')) && lst->next != NULL)
+	while (lst && !(ft_strchr(lst->content, '\n')))
 	{
 		lst->next = make_a_node(fd);
-		// if (lst->next == NULL)
-		// 	break ;
+		if (lst->next == NULL)
+			break ;
 		lst = lst->next;
 	}
-	line = changes(node, rem);
+	line = create_line(node, rem);
 	rem = create_rem(lst);
 	free_linked_list(node);
 	return (line);

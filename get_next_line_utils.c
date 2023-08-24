@@ -6,7 +6,7 @@
 /*   By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 20:30:06 by sabdulki          #+#    #+#             */
-/*   Updated: 2023/08/24 17:31:05 by sabdulki         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:03:06 by sabdulki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ int	slen(char *str, int truth)
 		return (0);
 	while (str[i] != '\0')
 	{
-		if (truth == 1)
-		{
-			if (str[i] == '\n')
-				return (i);
-		}
+		if (truth == 1 && str[i] == '\n')
+			return (i);
 		i++;
 	}
 	return (i);
@@ -76,67 +73,30 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (main_arr);
 }
 
-void	*free_linked_list(t_list *part) //, int all)
+void	*free_linked_list(t_list *part)
 {
-	// int	res;
-	// if (all == 0)
-	// {
-	// 	free(part);
-	// 	return (0);
-	// }
-	
 	if (!part)
 		return (NULL);
 	if (part->next)
-		free_linked_list(part->next); //, 1);
+		free_linked_list(part->next);
 	if (part->content)
 		free(part->content);
-	//part->next = NULL;
 	free(part);
-	part = NULL;
 	return (NULL);
 }
 
-char	*changes(t_list *node, t_list *rem)
+char	*create_line(t_list *node, t_list *rem)
 {
 	char	*line;
 	char	*l;
-	// t_list	*rem1;
-	// static int res;
-	// if ((!node && !rem))
-	// 	return (NULL);
-	// else if (!node && rem) // && ft_strchr(rem->content, '\n'))
-	// {
-	// 	if (ft_strchr(rem->content, '\n'))
-	// 	{
-	// 		line = fill_line(rem);
-	// 		rem1 = create_rem(rem);
-	// 		free_linked_list(rem);
-	// 		rem = rem1;
-	// 		res = 1;
-	// 	}
-	// 	else
-	// 		return (0);
-	// 	//return (line);
-	// }
-	// if (!node && rem && ft_strchr(rem->content, '\n'))
-	// {
-	// 	line = fill_line(rem);
-	// 	rem1 = create_rem(rem);
-	// 	free_linked_list(rem);
-	// 	rem = rem1;
-	// 	return (line);
-	// }
-	// if (!node && rem)
-	// {
-	// 	line = fill_line(rem);
-	// 	// free_linked_list(rem);
-	// 	free(rem->content);
-	// 	free(rem);
-	// 	rem = NULL;
-	// 	return (line);
-	// }
-	if (node && !rem)
+
+	if (!node && rem && !ft_strchr(rem->content, '\n'))
+	{
+		line = fill_line(rem);
+		free_linked_list(rem);
+		return (line);
+	}
+	else if (node && !rem)
 	{
 		line = fill_line(node);
 		return (line);
