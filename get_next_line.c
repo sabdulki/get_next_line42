@@ -134,20 +134,30 @@ char	*get_next_line(int fd)
 // int main(void)
 // { 
 // 	int fd;
-
+// 	char *str;
 // 	//fd = open("./alternate_line_nl_no_nl.txt", O_RDONLY);
 // 	fd = open("./text.txt", O_RDONLY);
 
-// 	printf("gnl 1: %s", get_next_line(fd));
-// 	printf("---gnl 1 ended---\n");
-// 	printf("\ngnl 2: %s", get_next_line(fd));
-// 	printf("\n---gnl 2 ended---\n");
-// 	printf("\ngnl 3: %s", get_next_line(fd));
-// 	printf("\n---gnl 3 ended---\n");
-// 	printf("\ngnl 4: %s", get_next_line(fd));
-// 	printf("\n---gnl 4 ended---\n");
-// 	printf("\ngnl 5: %s", get_next_line(fd));
-// 	printf("\n---gnl 5 ended---\n");
+// 	str = get_next_line(fd);
+// 	printf("gnl 1: %s", str);
+// 	free(str);
+
+// 	str = get_next_line(fd);
+// 	printf("gnl 2: %s", str);
+// 	free(str);
+
+// 	str = get_next_line(fd);
+// 	printf("gnl 3: %s", str);
+// 	free(str);
+
+// 	str = get_next_line(fd);
+// 	printf("gnl 4: %s", str);
+// 	free(str);
+
+// 	str = get_next_line(fd);
+// 	printf("gnl 5: %s", str);
+// 	free(str);
+
 // 	// printf("\ngnl 6: %s", get_next_line(fd));
 // 	// printf("\n---gnl 6 ended---\n");
 // 	// printf("\ngnl 7: %s", get_next_line(fd));

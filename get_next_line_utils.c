@@ -52,18 +52,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i_main;
 	char	*main_arr;
 
-	if (!s1)
-	{
-		main_arr = malloc(sizeof(char) * 1);
-		main_arr[0] = '\0'; 
-	}
 	if (!s1 || !s2)
-		return (0);
+		return (NULL);
 	i_len = 0;
 	i_main = 0;
 	main_arr = malloc(sizeof(char) * (slen(s1, 0) + slen(s2, 0) + 1));
-	if (main_arr == 0)
-		return (0);
+	if (!main_arr)
+		return (NULL);
 	while (i_len < slen(s1, 0))
 		main_arr[i_main++] = s1[i_len++];
 	i_len = 0;
